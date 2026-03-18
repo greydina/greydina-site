@@ -11,6 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
+    <!-- Google Analytics 4 -->
+    <!-- TODO: Replace G-XXXXXXXXXX with actual Measurement ID from GA4 dashboard -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
     <style>
         :root {
             /* Color System - Warm, not purple gradients */
@@ -727,5 +737,29 @@
             </div>
         </div>
     </footer>
+
+    <!-- GA4 Event Tracking for CTAs -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Track WhatsApp CTA clicks (conversion event)
+        document.querySelectorAll('a[href*="wa.me"]').forEach(function(link) {
+          link.addEventListener('click', function() {
+            gtag('event', 'whatsapp_click', {
+              'event_category': 'conversion',
+              'event_label': this.textContent.trim()
+            });
+          });
+        });
+        
+        // Track email clicks
+        document.querySelectorAll('a[href^="mailto:"]').forEach(function(link) {
+          link.addEventListener('click', function() {
+            gtag('event', 'email_click', {
+              'event_category': 'contact'
+            });
+          });
+        });
+      });
+    </script>
 </body>
 </html>
