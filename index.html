@@ -580,6 +580,28 @@
             }
         }
     </style>
+    
+    <!-- Google Analytics 4 -->
+    <!-- Reemplazar GA_MEASUREMENT_ID con tu ID real de analytics.google.com -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+        
+        // CTA click tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href*="wa.me"]').forEach(function(cta) {
+                cta.addEventListener('click', function(e) {
+                    gtag('event', 'whatsapp_click', {
+                        event_category: 'cta',
+                        event_label: e.target.textContent || 'WhatsApp CTA'
+                    });
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <nav>
